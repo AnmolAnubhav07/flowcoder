@@ -4,46 +4,133 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard | Campus360</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== Mobile tweaks for index.html ===== */
-    @media(max-width:960px){
-      /* Sidebar collapse */
-      .sidebar{
-        width:60px; padding:10px; overflow-x:hidden;
-      }
-      .sidebar h2, .sidebar nav a span{ display:none; }
-      .sidebar nav a{ padding:8px 6px; text-align:center; font-size:14px; }
-
-      /* Main content adjusts */
-      .main{ margin-left:70px; padding:15px; }
-
-      /* Cards stack vertically */
-      .cards, .grid-2{ flex-direction:column; grid-template-columns:1fr; gap:12px; }
-
-      /* Table scroll */
-      table{ display:block; width:100%; overflow-x:auto; white-space:nowrap; }
-      table th, table td{ font-size:12px; padding:4px 6px; }
-
-      /* Header search smaller */
-      header .header-actions .search{ width:100px; }
-
-      /* Quick buttons wrap */
-      .quick-buttons{ flex-wrap:wrap; gap:6px; }
-
-      /* Timetable grid scroll */
-      .timetable-grid{
-        grid-template-columns:120px repeat(5,280px);
-        overflow-x:auto; padding-bottom:8px;
-      }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(120deg, #eaf8f5 0%, #f5f9eb 100%);
+      margin: 0;
+      color: #222;
     }
-
-    /* Optional: smaller icons and spacing on very small phones */
+    .header {
+      background: #e3f6ee;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #f0f0f0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #179659;
+    }
+    .header-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #baf3d7;
+      object-fit: cover;
+    }
+    .header .icon {
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .main {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 22px 10px 30px 10px;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: 2em;
+      font-weight: 700;
+      margin: 12px 0 4px 0;
+      letter-spacing: 0.01em;
+    }
+    .hero p {
+      color: #188e61;
+      font-size: 1.1em;
+      margin: 0 0 10px 0;
+    }
+    .cards, .grid-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .card, .box, .alert-box {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px #0001;
+      padding: 21px 16px 15px 16px;
+      margin-bottom: 4px;
+    }
+    h2, h3 {
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      font-size: 1.18em;
+    }
+    h1, h2, h3 {
+      letter-spacing: 0.01em;
+    }
+    .btn {
+      background: #35b97a;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 18px;
+      font-size: 16px;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #24935d;
+    }
+    .quick-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .quick-buttons .btn {
+      flex: 1 1 110px;
+      margin: 0;
+      font-size: 15px;
+    }
+    .alert-box ul, ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1em;
+    }
+    .alert-box li {
+      margin-bottom: 7px;
+    }
+    .upcoming-list li {
+      margin-bottom: 7px;
+    }
+    @media(max-width:960px){
+      .sidebar { display: none !important; }
+      .main { padding:18px 4px 40px 4px; }
+    }
     @media(max-width:480px){
-      header .header-actions .search{ width:80px; font-size:12px; }
-      .header .icon{ font-size:18px; }
-      .profile-pic{ width:28px; height:28px; }
-      .btn{ font-size:12px; padding:4px 8px; }
+      .main { padding:12px 1px 18px 1px; }
+      .btn { font-size: 14px; padding:6px 14px;}
+      .profile-pic { width: 26px; height: 26px;}
+      .logo { font-size: 18px;}
     }
   </style>
 </head>
@@ -52,31 +139,19 @@
   <header class="header">
     <div class="logo">🎓 Campus360</div>
     <div class="header-actions">
-      <input type="text" class="search" placeholder="🔍 Search..."/>
+      <input type="text" class="search" placeholder="🔍 Search..." style="width:90px; border-radius:7px; border:1px solid #baf3d7; padding:5px 7px;"/>
       <span class="icon">🔔</span>
       <span class="icon">⚙️</span>
       <img src="https://via.placeholder.com/35" alt="Profile" class="profile-pic"/>
     </div>
   </header>
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <h2>Menu</h2>
-    <nav>
-      <a href="index.html" class="active">🏠 Dashboard</a>
-      <a href="attendance.html">📅 Attendance</a>
-      <a href="timetable.html">🕒 Timetable</a>
-      <a href="learning.html">📘 Learning</a>
-      <a href="goals.html">🎯 Goals</a>
-      <a href="reports.html">📊 Reports</a>
-      <a href="admin.html">👩‍🏫 Admin</a>
-    </nav>
-  </aside>
-
-  <!-- Main -->
+  
   <main class="main">
-    <h1>Welcome, Student! 👋</h1>
-
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Learn. Track. Achieve. 🌱</h1>
+      <p>Smart campus dashboard to guide your learning journey.</p>
+    </div>
     <!-- Summary Cards -->
     <section class="cards">
       <div class="card">
@@ -100,8 +175,7 @@
         <button class="btn" onclick="alert('View All')">View All</button>
       </div>
     </section>
-
-    <!-- Quick Links -->
+    <!-- Quick Links and Upcoming Assessments -->
     <section class="grid-2">
       <div class="box">
         <h2>Quick Links</h2>
@@ -114,16 +188,15 @@
       </div>
       <div class="box">
         <h2>Upcoming Assessments</h2>
-        <ul>
+        <ul class="upcoming-list">
           <li>Math Quiz — Sep 05</li>
           <li>Physics Lab — Sep 06</li>
           <li>English Assignment — Sep 08</li>
         </ul>
       </div>
     </section>
-
-    <!-- Notifications -->
-    <section class="box alert-box">
+    <!-- Alerts -->
+    <section class="alert-box box">
       <h2>Alerts</h2>
       <ul>
         <li>✅ Timetable synced successfully</li>
@@ -132,7 +205,5 @@
       </ul>
     </section>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
