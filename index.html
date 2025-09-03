@@ -1,209 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard | Campus360</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', Arial, sans-serif;
-      background: linear-gradient(120deg, #eaf8f5 0%, #f5f9eb 100%);
-      margin: 0;
-      color: #222;
-    }
-    .header {
-      background: #e3f6ee;
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #f0f0f0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #179659;
-    }
-    .header-actions {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
-    .profile-pic {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid #baf3d7;
-      object-fit: cover;
-    }
-    .header .icon {
-      font-size: 20px;
-      cursor: pointer;
-    }
-    .main {
-      max-width: 430px;
-      margin: 0 auto;
-      padding: 22px 10px 30px 10px;
-    }
-    .hero {
-      text-align: center;
-      margin-bottom: 22px;
-    }
-    .hero h1 {
-      font-size: 2em;
-      font-weight: 700;
-      margin: 12px 0 4px 0;
-      letter-spacing: 0.01em;
-    }
-    .hero p {
-      color: #188e61;
-      font-size: 1.1em;
-      margin: 0 0 10px 0;
-    }
-    .cards, .grid-2 {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .card, .box, .alert-box {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px #0001;
-      padding: 21px 16px 15px 16px;
-      margin-bottom: 4px;
-    }
-    h2, h3 {
-      font-weight: 700;
-      margin: 0 0 8px 0;
-      font-size: 1.18em;
-    }
-    h1, h2, h3 {
-      letter-spacing: 0.01em;
-    }
-    .btn {
-      background: #35b97a;
-      color: #fff;
-      border: none;
-      border-radius: 7px;
-      padding: 8px 18px;
-      font-size: 16px;
-      margin-top: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .btn:hover {
-      background: #24935d;
-    }
-    .quick-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .quick-buttons .btn {
-      flex: 1 1 110px;
-      margin: 0;
-      font-size: 15px;
-    }
-    .alert-box ul, ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 1em;
-    }
-    .alert-box li {
-      margin-bottom: 7px;
-    }
-    .upcoming-list li {
-      margin-bottom: 7px;
-    }
-    @media(max-width:960px){
-      .sidebar { display: none !important; }
-      .main { padding:18px 4px 40px 4px; }
-    }
-    @media(max-width:480px){
-      .main { padding:12px 1px 18px 1px; }
-      .btn { font-size: 14px; padding:6px 14px;}
-      .profile-pic { width: 26px; height: 26px;}
-      .logo { font-size: 18px;}
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowCoder Attendance Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Header -->
-  <header class="header">
-    <div class="logo">🎓 Campus360</div>
-    <div class="header-actions">
-      <input type="text" class="search" placeholder="🔍 Search..." style="width:90px; border-radius:7px; border:1px solid #baf3d7; padding:5px 7px;"/>
-      <span class="icon">🔔</span>
-      <span class="icon">⚙️</span>
-      <img src="https://via.placeholder.com/35" alt="Profile" class="profile-pic"/>
-    </div>
-  </header>
-  
+  <!-- Header -->
+<header class="header">
+  <div class="logo">🖥️ FlowCoder Attendance</div>
+  <div class="header-actions">
+    <input type="text" class="search" placeholder="🔍 Search for students, courses...">
+    
+    <!-- Single Notification Icon -->
+    <span class="icon">🔔</span>
+
+    <!-- Settings button -->
+    <button id="settingsBtn" class="icon">⚙️</button>
+
+    <!-- Profile picture (black placeholder) -->
+    <!-- Profile picture (black placeholder) -->
+<img src="https://via.placeholder.com/35/000000/FFFFFF?text=👤" 
+     alt="Profile" class="profile-pic" id="profilePic">
+
+
+    <!-- Hidden file input for profile pic -->
+    <input type="file" id="fileInput" accept="image/*" style="display:none;">
+  </div>
+</header>
+
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Main Menu</h2>
+    <nav>
+      <a href="index.html" class="active">🏠 Dashboard</a>
+      <a href="attendance.html">📅 Attendance History</a>
+      <a href="timetable.html">🕒 Timetable</a>
+      <a href="learning.html">📘 Learning Resources</a>
+      <a href="goals.html">🎯 Career Goals</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="admin.html">👩‍🏫 Admin Panel</a>
+    </nav>
+
+    <h2>Extras</h2>
+    <nav>
+      <a href="#">💡 Tips & Tricks</a>
+      <a href="#">📌 Reminders</a>
+      <a href="#">⚙️ Settings</a>
+      <a href="#">📚 Resources</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
   <main class="main">
-    <!-- Hero Section -->
-    <div class="hero">
-      <h1>Learn. Track. Achieve. 🌱</h1>
-      <p>Smart campus dashboard to guide your learning journey.</p>
-    </div>
-    <!-- Summary Cards -->
+    <h1>Welcome Back, Student 👋</h1>
+    <p id="date"></p>
+
+    <!-- Top Cards Section -->
     <section class="cards">
-      <div class="card">
-        <h3>Attendance</h3>
-        <p>📅 42 / 50 classes attended</p>
-        <button class="btn" onclick="alert('View Attendance')">View</button>
+      <div class="card present">
+        <h3>Today’s Attendance</h3>
+        <p>✅ Present</p>
       </div>
       <div class="card">
-        <h3>Next Class</h3>
-        <p>🧪 Physics — Room A105 (2:00 – 3:00 PM)</p>
-        <button class="btn" onclick="alert('Open Timetable')">Open Timetable</button>
+        <h3>Total Attendance</h3>
+        <p>📊 88% this month</p>
       </div>
       <div class="card">
-        <h3>Tasks</h3>
-        <p>📚 3 pending assignments</p>
-        <button class="btn" onclick="alert('View Tasks')">View Tasks</button>
+        <h3>Late Arrivals</h3>
+        <p>🚶‍♂️ 3 Times</p>
       </div>
       <div class="card">
-        <h3>Announcements</h3>
-        <p>📢 Chemistry lab moved to Lab-2 at 12 PM</p>
-        <button class="btn" onclick="alert('View All')">View All</button>
+        <h3>Upcoming Class</h3>
+        <p>🧪 Physics @ 2:00 PM</p>
+      </div>
+      <div class="card">
+        <h3>Pending Assignments</h3>
+        <p>📄 2 Tasks</p>
+      </div>
+      <div class="card">
+        <h3>New Messages</h3>
+        <p>✉️ 5 Unread</p>
       </div>
     </section>
-    <!-- Quick Links and Upcoming Assessments -->
+
+    <!-- Grid Section -->
     <section class="grid-2">
       <div class="box">
-        <h2>Quick Links</h2>
-        <div class="quick-buttons">
-          <button class="btn" onclick="alert('Open Attendance')">Attendance</button>
-          <button class="btn" onclick="alert('Open Timetable')">Timetable</button>
-          <button class="btn" onclick="alert('Open Learning')">Learning</button>
-          <button class="btn" onclick="alert('Open Reports')">Reports</button>
-        </div>
+        <h2>Subject-wise Attendance</h2>
+        <table>
+          <thead>
+            <tr><th>Subject</th><th>Attendance</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Math</td><td>90%</td><td>✅ Good</td></tr>
+            <tr><td>Science</td><td>85%</td><td>⚠️ Average</td></tr>
+            <tr><td>English</td><td>80%</td><td>⚠️ Needs Work</td></tr>
+            <tr><td>History</td><td>70%</td><td>❌ Low</td></tr>
+            <tr><td>Computer</td><td>95%</td><td>✅ Excellent</td></tr>
+          </tbody>
+        </table>
       </div>
+
       <div class="box">
-        <h2>Upcoming Assessments</h2>
-        <ul class="upcoming-list">
-          <li>Math Quiz — Sep 05</li>
-          <li>Physics Lab — Sep 06</li>
-          <li>English Assignment — Sep 08</li>
+        <h2>Monthly Attendance Trend</h2>
+        <div class="chart-placeholder">📊 Chart Placeholder</div>
+        <p class="note">Showing weekly trend (Aug 2025)</p>
+      </div>
+    </section>
+
+    <!-- Skill Progress Section -->
+    <section class="box">
+      <h2>Skill Progress Tracker</h2>
+      <div class="progress-bar"><span style="width: 80%">Math - 80%</span></div>
+      <div class="progress-bar"><span style="width: 60%">Science - 60%</span></div>
+      <div class="progress-bar"><span style="width: 45%">English - 45%</span></div>
+      <div class="progress-bar"><span style="width: 90%">Python - 90%</span></div>
+      <div class="progress-bar"><span style="width: 50%">Web Dev - 50%</span></div>
+      <div class="progress-bar"><span style="width: 70%">Data Structures - 70%</span></div>
+    </section>
+
+    <!-- Suggestions / Quick Actions -->
+    <section class="grid-2">
+      <div class="box">
+        <h2>Personalized Suggestions</h2>
+        <ul>
+          <li>⚡ Practice: Algebra Worksheet</li>
+          <li>🎥 Watch: Physics Lecture on Motion</li>
+          <li>📘 Review: English Grammar Notes</li>
+          <li>🎯 Set New Goal: Python Basics</li>
+          <li>💡 Try: Extra Practice Quiz</li>
+          <li>📚 Read: Computer Science Notes</li>
         </ul>
       </div>
+
+      <div class="box">
+        <h2>Quick Tasks</h2>
+        <div class="quick-buttons">
+          <button class="btn">Practice</button>
+          <button class="btn">Review</button>
+          <button class="btn">Watch Lecture</button>
+          <button class="btn">Set New Goal</button>
+          <button class="btn">Submit Assignment</button>
+          <button class="btn">Check Grades</button>
+        </div>
+      </div>
     </section>
-    <!-- Alerts -->
-    <section class="alert-box box">
-      <h2>Alerts</h2>
+
+    <!-- Alerts / Notifications -->
+    <section class="box alert-box">
+      <h2>System Alerts</h2>
       <ul>
-        <li>✅ Timetable synced successfully</li>
-        <li>⚠️ Room change: CS Lab → Lab-2</li>
-        <li>📢 Free period available</li>
+        <li>✅ Attendance marked successfully at 9:02 AM</li>
+        <li>⚠️ You were late on 3rd Aug (5 mins late)</li>
+        <li>📢 Free Period now! Use this time wisely</li>
+        <li>📌 Reminder: Submit assignment for Web Dev</li>
+        <li>⚡ Update: New Python course available</li>
       </ul>
     </section>
+
+    <!-- Upcoming Events -->
+    <section class="cards">
+      <div class="card">
+        <h3>Next Lecture</h3>
+        <p>🧪 Physics Lab @ 3:30 PM</p>
+      </div>
+      <div class="card">
+        <h3>Workshop</h3>
+        <p>💻 FlowCoder JS Bootcamp @ 5:00 PM</p>
+      </div>
+      <div class="card">
+        <h3>Exam Reminder</h3>
+        <p>📝 Math Test on 7th Sep</p>
+      </div>
+      <div class="card">
+        <h3>Project Deadline</h3>
+        <p>📂 Web Dev Final Project - 15th Sep</p>
+      </div>
+    </section>
+
+    <!-- Footer / Extra Helpers -->
+    <section class="box">
+      <h2>Helpful Links</h2>
+      <ul>
+        <li>📘 Learning Resources</li>
+        <li>🛠️ Tools & IDEs</li>
+        <li>📊 Performance Dashboard</li>
+        <li>💬 Student Forum</li>
+        <li>📌 Important Announcements</li>
+      </ul>
+    </section>
+
+    <!-- Toast Notifications Placeholder -->
+    <div id="campus-toast-container"></div>
   </main>
+
+  <!-- Settings Modal (hidden by default) -->
+  <div class="modal" id="settingsModal" style="display:none;">
+    <div class="dialog">
+      <h2>Profile Settings</h2>
+      <div class="row">
+        <div class="col">
+          <label>Full Name</label>
+          <input type="text" value="John Doe">
+        </div>
+        <div class="col">
+          <label>Email</label>
+          <input type="text" value="john@example.com">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>Change Profile Picture</label>
+          <button class="btn" id="changePicBtn">Upload Image</button>
+        </div>
+        <div class="col">
+          <label>Password</label>
+          <input type="text" value="********">
+        </div>
+      </div>
+      <div class="mt-12">
+        <button class="btn success" id="saveSettings">💾 Save Changes</button>
+        <button class="btn ghost" id="cancelSettings">❌ Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
