@@ -629,3 +629,65 @@ button:disabled, .btn[disabled] { opacity: 0.6; transform:none; cursor:not-allow
     display: block;
   }
 }
+/* === Mobile Compatibility Layer === */
+@media (max-width: 980px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 9px 6px;
+    gap: 6px;
+    text-align: center;
+  }
+  .header .header-actions {
+    gap: 10px;
+    margin-top: 4px;
+    width: 100%;
+    justify-content: center;
+  }
+  .header .search {
+    display: none !important; /* Hide big search on tiny screens */
+  }
+  .sidebar {
+    display: none !important;
+  }
+  .main {
+    margin-left: 0 !important;
+    padding: 70px 8px 18px 8px;
+    max-width: 100vw;
+  }
+  .cards, .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+  .card, .box {
+    padding: 12px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .profile-pic {
+    width: 24px;
+    height: 24px;
+  }
+  .btn {
+    font-size: 13px !important;
+    padding: 7px 12px !important;
+    border-radius: 7px;
+  }
+  th, td {
+    font-size: 12px;
+    padding: 7px 6px;
+  }
+}
+@media (max-width: 500px) {
+  .main {
+    padding: 58px 2px 8px 2px;
+  }
+  h1, h2 {
+    font-size: 1.20em !important;
+  }
+  .btn {
+    font-size: 12px !important;
+    padding: 6px 9px !important;
+  }
+}
+
