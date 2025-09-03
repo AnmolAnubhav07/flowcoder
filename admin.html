@@ -3,232 +3,343 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FlowCoder Attendance Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Admin Panel | Campus360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(120deg, #eaf8f5 0%, #f5f9eb 100%);
+      margin: 0;
+      color: #222;
+    }
+    .header {
+      background: #e3f6ee;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #f0f0f0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #179659;
+      letter-spacing: 0.04em;
+    }
+    .header-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #baf3d7;
+      object-fit: cover;
+    }
+    .icon {
+      font-size: 19px;
+      cursor: pointer;
+    }
+    .main {
+      max-width: 470px;
+      margin: 0 auto;
+      padding: 22px 10px 30px 10px;
+    }
+    h1 {
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #147a47;
+      letter-spacing: 0.01em;
+    }
+    h2, h3 {
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+    /* Sidebar styles */
+    .sidebar {
+      background: #d5f5e7;
+      min-width: 180px;
+      padding: 16px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      border-right: 1px solid #e0e0e0;
+      font-weight: 700;
+    }
+    .sidebar h2 { margin-bottom: 12px;}
+    .sidebar nav a {
+      display: block; text-decoration: none; color: #222;
+      margin-bottom: 9px; padding: 7px 4px; border-radius:6px;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #baf3d7;
+      color: #128065;
+    }
+    /* Card styles */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .card, .box, .alert-box {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px #0001;
+      padding: 18px 13px 14px 18px;
+      font-size: 1.04em;
+    }
+    .present { background: #e7fde9; color: #12bc7e; font-weight:700;}
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      margin-top: 8px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px #cce5d6aa;
+      overflow-x: auto;
+      display: block;
+      font-size: 0.98em;
+    }
+    table th, table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+      white-space: nowrap;
+    }
+    table th { background: #e3f6ee; }
+    .actions {
+      margin-top:12px;
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+    .btn {
+      background: #35b97a;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 13px;
+      font-size: 15px;
+      margin-top: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #24935d; }
+    .grid-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+    .chart-placeholder {
+      padding: 34px 0;
+      text-align: center;
+      color: #179659;
+      font-size: 1.3em;
+    }
+    .alert-box ul, ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1em;
+    }
+    .alert-box li {
+      margin-bottom: 8px;
+    }
+    form label {
+      display:block;
+      margin-bottom:11px;
+      font-weight:500;
+      color:#247644;
+    }
+    form select, form input[type="date"] {
+      margin-left: 7px;
+      margin-right: 8px;
+      border-radius: 6px;
+      border:1px solid #baf3d7;
+      padding:3px 8px;
+      font-size: 1em;
+    }
+    form button[type="submit"] {
+      margin-top:8px;
+      padding:7px 14px;
+    }
+    @media (max-width: 960px) {
+      .sidebar { display: none; }
+      .main { padding:18px 4px 35px 4px; }
+      table th, table td { font-size: 12px; padding: 4px 6px;}
+    }
+    @media (max-width: 500px) {
+      .main { padding:9px 1px 9px 1px;}
+      .btn { font-size: 12px; padding:5px 9px;}
+      .profile-pic { width: 24px; height: 24px;}
+      .logo { font-size:18px;}
+      table th, table td { padding: 3px 6px;}
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
-  <!-- Header -->
-<header class="header">
-  <div class="logo">🖥️ FlowCoder Attendance</div>
-  <div class="header-actions">
-    <input type="text" class="search" placeholder="🔍 Search for students, courses...">
-    
-    <!-- Single Notification Icon -->
-    <span class="icon">🔔</span>
-
-    <!-- Settings button -->
-    <button id="settingsBtn" class="icon">⚙️</button>
-
-    <!-- Profile picture (black placeholder) -->
-    <!-- Profile picture (black placeholder) -->
-<img src="https://via.placeholder.com/35/000000/FFFFFF?text=👤" 
-     alt="Profile" class="profile-pic" id="profilePic">
-
-
-    <!-- Hidden file input for profile pic -->
-    <input type="file" id="fileInput" accept="image/*" style="display:none;">
-  </div>
-</header>
-
-
-  <!-- Sidebar -->
+  <header class="header">
+    <div class="logo">🏫 Campus360 Admin</div>
+    <div class="header-actions">
+      <input type="text" class="search" placeholder="🔍 Search student..." style="width:110px; border-radius:7px; border:1px solid #baf3d7; padding:5px 7px;">
+      <span class="icon">🔔</span>
+      <span class="icon">⚙️</span>
+      <img src="https://via.placeholder.com/35" alt="Admin Profile" class="profile-pic">
+    </div>
+  </header>
+  <!-- Sidebar (hidden on mobile) -->
   <aside class="sidebar">
-    <h2>Main Menu</h2>
+    <h2>Admin Menu</h2>
     <nav>
-      <a href="index.html" class="active">🏠 Dashboard</a>
-      <a href="attendance.html">📅 Attendance History</a>
+      <a href="index.html">🏠 Dashboard</a>
+      <a href="attendance.html">📅 Attendance</a>
       <a href="timetable.html">🕒 Timetable</a>
-      <a href="learning.html">📘 Learning Resources</a>
-      <a href="goals.html">🎯 Career Goals</a>
+      <a href="learning.html">📘 Learning</a>
+      <a href="goals.html">🎯 Goals</a>
       <a href="reports.html">📊 Reports</a>
-      <a href="admin.html">👩‍🏫 Admin Panel</a>
-    </nav>
-
-    <h2>Extras</h2>
-    <nav>
-      <a href="#">💡 Tips & Tricks</a>
-      <a href="#">📌 Reminders</a>
-      <a href="#">⚙️ Settings</a>
-      <a href="#">📚 Resources</a>
+      <a href="admin.html" class="active">👩‍🏫 Admin Panel</a>
     </nav>
   </aside>
-
   <!-- Main Content -->
   <main class="main">
-    <h1>Welcome Back, Student 👋</h1>
+    <h1>Admin Panel 👩‍🏫</h1>
     <p id="date"></p>
-
-    <!-- Top Cards Section -->
+    <!-- Quick Overview Cards -->
     <section class="cards">
-      <div class="card present">
-        <h3>Today’s Attendance</h3>
-        <p>✅ Present</p>
-      </div>
-      <div class="card">
-        <h3>Total Attendance</h3>
-        <p>📊 88% this month</p>
-      </div>
-      <div class="card">
-        <h3>Late Arrivals</h3>
-        <p>🚶‍♂️ 3 Times</p>
-      </div>
-      <div class="card">
-        <h3>Upcoming Class</h3>
-        <p>🧪 Physics @ 2:00 PM</p>
-      </div>
-      <div class="card">
-        <h3>Pending Assignments</h3>
-        <p>📄 2 Tasks</p>
-      </div>
-      <div class="card">
-        <h3>New Messages</h3>
-        <p>✉️ 5 Unread</p>
-      </div>
+      <div class="card present">✅ Present Today: 120</div>
+      <div class="card">⚠️ Late Students: 14</div>
+      <div class="card">❌ Absent: 9</div>
+      <div class="card">📘 Average Attendance: 87%</div>
+      <div class="card">📈 Top Class: 10-A (92%)</div>
     </section>
-
-    <!-- Grid Section -->
-    <section class="grid-2">
-      <div class="box">
-        <h2>Subject-wise Attendance</h2>
-        <table>
-          <thead>
-            <tr><th>Subject</th><th>Attendance</th><th>Status</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Math</td><td>90%</td><td>✅ Good</td></tr>
-            <tr><td>Science</td><td>85%</td><td>⚠️ Average</td></tr>
-            <tr><td>English</td><td>80%</td><td>⚠️ Needs Work</td></tr>
-            <tr><td>History</td><td>70%</td><td>❌ Low</td></tr>
-            <tr><td>Computer</td><td>95%</td><td>✅ Excellent</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="box">
-        <h2>Monthly Attendance Trend</h2>
-        <div class="chart-placeholder">📊 Chart Placeholder</div>
-        <p class="note">Showing weekly trend (Aug 2025)</p>
-      </div>
-    </section>
-
-    <!-- Skill Progress Section -->
+    <!-- Class View -->
     <section class="box">
-      <h2>Skill Progress Tracker</h2>
-      <div class="progress-bar"><span style="width: 80%">Math - 80%</span></div>
-      <div class="progress-bar"><span style="width: 60%">Science - 60%</span></div>
-      <div class="progress-bar"><span style="width: 45%">English - 45%</span></div>
-      <div class="progress-bar"><span style="width: 90%">Python - 90%</span></div>
-      <div class="progress-bar"><span style="width: 50%">Web Dev - 50%</span></div>
-      <div class="progress-bar"><span style="width: 70%">Data Structures - 70%</span></div>
+      <h2>Live Class Attendance</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Roll No.</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Status</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>Aman Kumar</td>
+            <td>10-A</td>
+            <td>✅ Present</td>
+            <td>On Time</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>Priya Sharma</td>
+            <td>10-A</td>
+            <td>⚠️ Late</td>
+            <td>5 min late</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Ravi Singh</td>
+            <td>10-B</td>
+            <td>❌ Absent</td>
+            <td>No Info</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td>Neha Verma</td>
+            <td>10-B</td>
+            <td>✅ Present</td>
+            <td>On Time</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>Arjun Patel</td>
+            <td>10-C</td>
+            <td>✅ Present</td>
+            <td>Good</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="actions">
+        <button class="btn">Export CSV</button>
+        <button class="btn">Export PDF</button>
+        <button class="btn">Send Alerts</button>
+      </div>
     </section>
-
-    <!-- Suggestions / Quick Actions -->
+    <!-- Charts -->
     <section class="grid-2">
       <div class="box">
-        <h2>Personalized Suggestions</h2>
-        <ul>
-          <li>⚡ Practice: Algebra Worksheet</li>
-          <li>🎥 Watch: Physics Lecture on Motion</li>
-          <li>📘 Review: English Grammar Notes</li>
-          <li>🎯 Set New Goal: Python Basics</li>
-          <li>💡 Try: Extra Practice Quiz</li>
-          <li>📚 Read: Computer Science Notes</li>
-        </ul>
+        <h2>Attendance Trends</h2>
+        <div class="chart-placeholder">📊 Monthly Attendance Trend Chart</div>
       </div>
-
       <div class="box">
-        <h2>Quick Tasks</h2>
-        <div class="quick-buttons">
-          <button class="btn">Practice</button>
-          <button class="btn">Review</button>
-          <button class="btn">Watch Lecture</button>
-          <button class="btn">Set New Goal</button>
-          <button class="btn">Submit Assignment</button>
-          <button class="btn">Check Grades</button>
-        </div>
+        <h2>Class Comparison</h2>
+        <div class="chart-placeholder">📈 Class Performance Comparison</div>
       </div>
     </section>
-
-    <!-- Alerts / Notifications -->
+    <!-- Alerts -->
     <section class="box alert-box">
-      <h2>System Alerts</h2>
+      <h2>Important Alerts</h2>
       <ul>
-        <li>✅ Attendance marked successfully at 9:02 AM</li>
-        <li>⚠️ You were late on 3rd Aug (5 mins late)</li>
-        <li>📢 Free Period now! Use this time wisely</li>
-        <li>📌 Reminder: Submit assignment for Web Dev</li>
-        <li>⚡ Update: New Python course available</li>
+        <li>⚠️ 5 students have less than 75% attendance.</li>
+        <li>📢 Class 10-B shows improvement of +8% this month.</li>
+        <li>❌ 3 students absent for more than 7 consecutive days.</li>
+        <li>✅ Class 10-C achieved 90%+ attendance consistently.</li>
       </ul>
     </section>
-
-    <!-- Upcoming Events -->
-    <section class="cards">
-      <div class="card">
-        <h3>Next Lecture</h3>
-        <p>🧪 Physics Lab @ 3:30 PM</p>
-      </div>
-      <div class="card">
-        <h3>Workshop</h3>
-        <p>💻 FlowCoder JS Bootcamp @ 5:00 PM</p>
-      </div>
-      <div class="card">
-        <h3>Exam Reminder</h3>
-        <p>📝 Math Test on 7th Sep</p>
-      </div>
-      <div class="card">
-        <h3>Project Deadline</h3>
-        <p>📂 Web Dev Final Project - 15th Sep</p>
-      </div>
-    </section>
-
-    <!-- Footer / Extra Helpers -->
+    <!-- Report Generation -->
     <section class="box">
-      <h2>Helpful Links</h2>
-      <ul>
-        <li>📘 Learning Resources</li>
-        <li>🛠️ Tools & IDEs</li>
-        <li>📊 Performance Dashboard</li>
-        <li>💬 Student Forum</li>
-        <li>📌 Important Announcements</li>
-      </ul>
+      <h2>Generate Custom Reports</h2>
+      <form>
+        <label>
+          Select Class:
+          <select>
+            <option>10-A</option>
+            <option>10-B</option>
+            <option>10-C</option>
+            <option>11-A</option>
+          </select>
+        </label>
+        <label>
+          Date Range:
+          <input type="date"> to <input type="date">
+        </label>
+        <label>
+          Report Type:
+          <select>
+            <option>Attendance Report</option>
+            <option>Performance Report</option>
+            <option>Trend Analysis</option>
+          </select>
+        </label>
+        <button type="submit" class="btn">Generate</button>
+      </form>
     </section>
-
-    <!-- Toast Notifications Placeholder -->
-    <div id="campus-toast-container"></div>
   </main>
-
-  <!-- Settings Modal (hidden by default) -->
-  <div class="modal" id="settingsModal" style="display:none;">
-    <div class="dialog">
-      <h2>Profile Settings</h2>
-      <div class="row">
-        <div class="col">
-          <label>Full Name</label>
-          <input type="text" value="John Doe">
-        </div>
-        <div class="col">
-          <label>Email</label>
-          <input type="text" value="john@example.com">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>Change Profile Picture</label>
-          <button class="btn" id="changePicBtn">Upload Image</button>
-        </div>
-        <div class="col">
-          <label>Password</label>
-          <input type="text" value="********">
-        </div>
-      </div>
-      <div class="mt-12">
-        <button class="btn success" id="saveSettings">💾 Save Changes</button>
-        <button class="btn ghost" id="cancelSettings">❌ Cancel</button>
-      </div>
-    </div>
-  </div>
+  <script>
+    // Show current date in header
+    document.getElementById('date').textContent =
+      "Date: " + new Date().toLocaleDateString();
+  </script>
+</body>
+</html>
 
   <script src="script.js"></script>
 </body>
 </html>
+
